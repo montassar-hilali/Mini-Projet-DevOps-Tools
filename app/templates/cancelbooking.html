@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white py-3">
+                <h1 class="h3 mb-0 text-danger">
+                    <i class="fas fa-calendar-times me-2"></i>Cancel Meeting
+                </h1>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-muted mb-4">Select a meeting to cancel. Please note that you cannot cancel meetings that have already occurred.</p>
+                
+                {% if form.ids.choices|length > 0 %}
+                <form action="" method="post" class="needs-validation" novalidate>
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.ids.id }}" class="form-label fw-medium">
+                            <i class="fas fa-list-ul me-2"></i>Select Meeting
+                        </label>
+                        {{ form.ids(class="form-select") }}
+                        {% for error in form.ids.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger py-2" onclick="return confirm('Are you sure you want to cancel this meeting?')">
+                            <i class="fas fa-trash-alt me-2"></i>{{ form.submit.label }}
+                        </button>
+                    </div>
+                </form>
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-calendar-check fa-4x text-muted mb-3"></i>
+                    <h3 class="h4">No Meetings to Cancel</h3>
+                    <p class="text-muted">There are no upcoming meetings that can be cancelled.</p>
+                    <a href="{{ url_for('book') }}" class="btn btn-primary mt-3">
+                        <i class="fas fa-calendar-plus me-2"></i>Book a Meeting
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">
+                    <i class="fas fa-calendar-plus me-2"></i>Book a Meeting Room
+                </h1>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-muted mb-4">Fill out the form below to schedule a new meeting.</p>
+                
+                <form action="" method="post" class="needs-validation" novalidate>
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.title.id }}" class="form-label fw-medium">
+                            <i class="fas fa-heading me-2"></i>{{ form.title.label }}
+                        </label>
+                        {{ form.title(class="form-control", placeholder="Enter meeting title") }}
+                        {% for error in form.title.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.room.id }}" class="form-label fw-medium">
+                            <i class="fas fa-door-open me-2"></i>{{ form.room.label }}
+                        </label>
+                        {{ form.room(class="form-select") }}
+                        {% for error in form.room.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                        <div class="form-text">
+                            <a href="{{ url_for('roomavailable') }}" class="text-decoration-none">
+                                <i class="fas fa-search me-1"></i>Check room availability first
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.date.id }}" class="form-label fw-medium">
+                            <i class="far fa-calendar-alt me-2"></i>{{ form.date.label }}
+                        </label>
+                        {{ form.date(class="form-control dtpick", placeholder="YYYY-MM-DD") }}
+                        {% for error in form.date.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.startTime.id }}" class="form-label fw-medium">
+                                <i class="far fa-clock me-2"></i>{{ form.startTime.label }}
+                            </label>
+                            {{ form.startTime(class="form-select") }}
+                            {% for error in form.startTime.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.endTime.id }}" class="form-label fw-medium">
+                                <i class="far fa-clock me-2"></i>{{ form.endTime.label }}
+                            </label>
+                            {{ form.endTime(class="form-select") }}
+                            {% for error in form.endTime.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary py-2">
+                            <i class="fas fa-calendar-check me-2"></i>{{ form.submit.label }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

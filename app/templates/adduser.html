@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">
+                    <i class="fas fa-user-plus me-2"></i>Add User
+                </h1>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-muted mb-4">Create a new user account and assign them to a team.</p>
+                
+                <form action="" method="post" class="needs-validation" novalidate>
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.username.id }}" class="form-label fw-medium">
+                            <i class="fas fa-user me-2"></i>{{ form.username.label }}
+                        </label>
+                        {{ form.username(class="form-control", size=32, placeholder="Enter username") }}
+                        {% for error in form.username.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.password.id }}" class="form-label fw-medium">
+                            <i class="fas fa-lock me-2"></i>{{ form.password.label }}
+                        </label>
+                        {{ form.password(class="form-control", size=32, placeholder="Enter password") }}
+                        {% for error in form.password.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.team.id }}" class="form-label fw-medium">
+                            <i class="fas fa-users me-2"></i>{{ form.team.label }}
+                        </label>
+                        {{ form.team(class="form-select") }}
+                        {% for error in form.team.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary py-2">
+                            <i class="fas fa-user-plus me-2"></i>{{ form.submit.label }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

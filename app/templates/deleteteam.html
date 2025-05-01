@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-danger text-white">
+                <h1 class="h3 mb-0">
+                    <i class="fas fa-users-slash me-2"></i>Delete Team
+                </h1>
+            </div>
+            <div class="card-body p-4">
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Warning:</strong> Deleting a team will affect all associated users and meetings.
+                </div>
+                
+                <form action="" method="post" class="needs-validation" novalidate>
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.teamName.id }}" class="form-label fw-medium">
+                            <i class="fas fa-users me-2"></i>{{ form.teamName.label }}
+                        </label>
+                        {{ form.teamName(class="form-select") }}
+                        {% for error in form.teamName.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger py-2" onclick="return confirm('Are you sure you want to delete this team? This action cannot be undone.')">
+                            <i class="fas fa-trash-alt me-2"></i>{{ form.submit.label }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

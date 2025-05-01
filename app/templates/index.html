@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-5 text-center">
+        {% if current_user.is_anonymous %}
+        <div class="py-5">
+            <i class="fas fa-calendar-check fa-4x mb-4 text-primary"></i>
+            <h1 class="display-4 mb-4">Welcome to Room Booking System</h1>
+            <p class="lead mb-4">Efficiently manage meeting rooms and schedule appointments with our easy-to-use booking platform.</p>
+            <div class="mt-5">
+                <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-4 me-3">
+                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                </a>
+                <a href="{{ url_for('register') }}" class="btn btn-outline-secondary btn-lg px-4">
+                    <i class="fas fa-user-plus me-2"></i>Register
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-start">
+            <h1 class="display-5 mb-4">
+                <i class="fas fa-user-circle text-primary me-2"></i>Welcome, {{ current_user.username }}!
+            </h1>
+            
+            <div class="row mt-5">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-primary border-top border-0 border-4 rounded-3 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-calendar-plus fa-3x text-primary mb-3"></i>
+                            <h3 class="card-title h5">Book a Room</h3>
+                            <p class="card-text text-muted">Schedule a new meeting in any available room.</p>
+                            <a href="{{ url_for('book') }}" class="btn btn-primary mt-3">
+                                <i class="fas fa-plus me-2"></i>New Booking
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-success border-top border-0 border-4 rounded-3 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-search fa-3x text-success mb-3"></i>
+                            <h3 class="card-title h5">Find Available Rooms</h3>
+                            <p class="card-text text-muted">Check which rooms are free for your time slot.</p>
+                            <a href="{{ url_for('roomavailable') }}" class="btn btn-success mt-3">
+                                <i class="fas fa-search me-2"></i>Search Rooms
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-info border-top border-0 border-4 rounded-3 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-list-alt fa-3x text-info mb-3"></i>
+                            <h3 class="card-title h5">View Meetings</h3>
+                            <p class="card-text text-muted">See all scheduled meetings and their details.</p>
+                            <a href="{{ url_for('meetingbooker') }}" class="btn btn-info mt-3 text-white">
+                                <i class="fas fa-list me-2"></i>Meeting List
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% if current_user.team == 'Admin' %}
+            <div class="mt-4">
+                <div class="card border-danger border-start border-0 border-4">
+                    <div class="card-header bg-danger text-white">
+                        <i class="fas fa-shield-alt me-2"></i>Admin Controls
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <a href="{{ url_for('addteam') }}" class="btn btn-outline-secondary w-100 py-3">
+                                    <i class="fas fa-users me-2"></i>Add Team
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="{{ url_for('adduser') }}" class="btn btn-outline-secondary w-100 py-3">
+                                    <i class="fas fa-user-plus me-2"></i>Add User
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="{{ url_for('deleteteam') }}" class="btn btn-outline-secondary w-100 py-3">
+                                    <i class="fas fa-users-slash me-2"></i>Delete Team
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="{{ url_for('deleteuser') }}" class="btn btn-outline-secondary w-100 py-3">
+                                    <i class="fas fa-user-minus me-2"></i>Delete User
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
